@@ -20,7 +20,28 @@ resource "aws_security_group" "security-group1" {
   cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
+resource "aws_vpc" "very_cool_vpc"{
+    cidr_block = "10.0.0.0/16"
+    enable_dns_support = "true"
+    enable_dns_hostnames = "true"
+}
+resource "aws_subnet" "subnetpub"{
+    vpc_id = aws_vpc.very_cool_vpc.id
+    cidr_block = "10.0.1.0/24"
+    map_public_ip_on_launch = "true"
+    availability_zone = "eu-west-2b"
+    tags {
+      Name = "publicSub"
+    }
+}
+resource "aws_subnet" "subnetpriv" {
+    vpc_id = aws_vpc.very_cool_vpc.id
+    cidr_block = "10.0.2.0/24"
+    availability_zone = "eu-west-2b"
+    tags {
+      Name = "privateSub"
+    }
+}
 resource "aws_instance" "web" {
   ami           = "ami-0505148b3591e4c07"
   instance_type = var.instance_name
