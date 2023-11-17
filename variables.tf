@@ -1,16 +1,16 @@
 #Keys
 
 variable "access_key" {
-  type = string
+  type      = string
   sensitive = true
 }
 variable "secret_key" {
-  type = string
+  type      = string
   sensitive = true
 }
 variable "key_name" {
-  type = string
-  sensitive = true 
+  type      = string
+  sensitive = true
 }
 
 # Instance Config
@@ -23,11 +23,15 @@ variable "instance_ami" {
 }
 variable "instance_region" {
   default = "eu-west-2"
+  type    = string
+}
+variable "instance_type" {
+  default = "t2.micro"
   type = string
 }
 
 # Bucket Config
 
 variable "bucket_name" {
-  type = string 
+  type = string
 }
