@@ -1,10 +1,12 @@
 #vpc: very_cool_vpc
+       #gateways
 resource "aws_internet_gateway" "very_cool_gateway"{
     vpc_id = aws_vpc.very_cool_vpc.id
     tags {
       Name = "very_cool_vpc"
     }
 }
+       #routes
 resource "aws_route_table" "very_cool_table" {
     vpc_id = aws_vpc.very_cool_vpc.id
     route {
@@ -19,6 +21,8 @@ resource "aws_route_table_association" "very_cool_association" {
     subnet_id = aws_subnet.subnetpub.id
     route_table_id = aws_route_table.very_cool_table.id
 }
+
+     #security
 resource "aws_security_group" "security-group1" {
   name = "security-group1"
   ingress {
@@ -36,6 +40,6 @@ resource "aws_security_group" "security-group1" {
   }
 }
 
-
+#
 
         

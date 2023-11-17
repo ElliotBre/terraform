@@ -3,11 +3,13 @@ provider "aws" {
   secret_key = var.secret_key
   region     = var.instance_region
 }
+# vpc config
 resource "aws_vpc" "very_cool_vpc"{
     cidr_block = "10.0.0.0/16"
     enable_dns_support = "true"
     enable_dns_hostnames = "true"
 }
+    #subnets
 resource "aws_subnet" "subnetpub"{
     vpc_id = aws_vpc.very_cool_vpc.id
     cidr_block = "10.0.1.0/24"
@@ -25,6 +27,7 @@ resource "aws_subnet" "subnetpriv" {
       Name = "privateSub"
     }
 }
+      #vpc resources
 resource "aws_instance" "web" {
   ami           = "ami-0505148b3591e4c07"
   instance_type = var.instance_name
